@@ -47,7 +47,7 @@ export default function AnimatedBoyWave() {
       // x: -300 = moves 300px to the left
       // x: 500 = moves 500px to the right (further)
       gsap.to(characterRef.current, {
-        x: 700,
+        x: 1500,
         y: -500,
         rotate: 10,
         duration: 5,
@@ -88,10 +88,10 @@ export default function AnimatedBoyWave() {
         {/* "translate-x-96" = starts 384px to the RIGHT */}
         {/* "translate-x-full" = starts completely off screen to the RIGHT */}
         {/* "-translate-x-full" = starts completely off screen to the LEFT */}
-        <div ref={characterRef} className="-translate-x-250 translate-y-120">
+        <div ref={characterRef} className="-translate-x-150 translate-y-60">
           <img ref={imageRef} src={frames[0]} alt="Boy waving animation" className="w-64 h-auto drop-shadow-lg" data-frame="0" />
         </div>
-        <p className="text-lg text-gray-600 text-center max-w-md">Scroll down to see the boy wave at you with smooth frame-by-frame animation</p>
+        {/* <p className="text-lg text-gray-600 text-center max-w-md">Scroll down to see the boy wave at you with smooth frame-by-frame animation</p> */}
       </div>
     </div>
   );
