@@ -6,7 +6,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 // Dynamically import all boy-wave frames using Vite's glob
-const frameModules = import.meta.glob<{ default: string }>("../assets/boy-wave/boy-wave-*.png", { eager: true });
+// const frameModules = import.meta.glob<{ default: string }>("../assets/boy-wave/boy-wave-*.png", { eager: true });
+
+const frameModules = import.meta.glob<{ default: string }>("../assets/mordi-fly/mordi-flight-*.png", { eager: true });
 
 // Sort and extract frame URLs - sorts numerically by filename
 const frames = Object.keys(frameModules)
