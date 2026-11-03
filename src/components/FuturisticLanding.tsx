@@ -76,7 +76,7 @@ export default function FuturisticLanding() {
         <div className="text-center max-w-4xl px-6">
           {/* Title */}
           <h1 ref={titleRef} className="text-7xl md:text-8xl font-black mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-2xl">
-            Welcome to the Future
+            Welcome to the Patrick
           </h1>
 
           {/* Subtitle */}
