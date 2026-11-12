@@ -6,11 +6,12 @@ import Globe from "./components/Globe";
 function App() {
   return (
     <>
+       <Globe />
       <FuturisticLanding />
       <AnimatedBoyWave />
 
       <Testimonials />
-      <Globe />
+   
     </>
   );
 }

@@ -1,6 +1,6 @@
 export default function FuturisticLanding() {
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-black text-white">
+    <section className="relative min-h-screen w-full overflow-hidden bg-black text-white pt-20">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(14,14,22,0.45),rgba(0,0,0,0.95)_70%)]" />
 
       <div className="pointer-events-none absolute -left-32 top-6 h-[28rem] w-[42rem] rounded-full border border-blue-400/30 bg-[radial-gradient(circle_at_25%_35%,rgba(58,120,255,0.45),rgba(24,49,110,0.05)_60%,transparent_82%)] blur-sm" />
@@ -8,20 +8,6 @@ export default function FuturisticLanding() {
       <div className="pointer-events-none absolute bottom-8 left-1/2 h-24 w-[34rem] -translate-x-1/2 rounded-full bg-fuchsia-500/20 blur-3xl" />
 
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col items-center px-6 pb-10 pt-8 text-center sm:px-8">
-        <header className="mb-14 flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/90 backdrop-blur-md">
-          <div className="grid h-6 w-6 place-items-center rounded-md bg-gradient-to-br from-blue-500 to-violet-500 text-[11px] shadow-[0_0_20px_rgba(78,130,255,0.7)]">🎬</div>
-          <span className="font-medium tracking-wide">Screen Movie</span>
-          <span className="text-base text-white/70">☰</span>
-        </header>
-
-        <div className="mb-7 grid h-24 w-24 place-items-center rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800/80 via-slate-950/95 to-orange-500/25 shadow-[0_0_30px_rgba(68,116,255,0.45),0_0_55px_rgba(255,102,0,0.35)]">
-          <div className="space-y-2">
-            <span className="block h-1.5 w-10 rounded-full bg-white" />
-            <span className="block h-1.5 w-10 rounded-full bg-white/80" />
-            <span className="block h-1.5 w-10 rounded-full bg-white/60" />
-          </div>
-        </div>
-
         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-white/70 backdrop-blur-md">
           <span>Latest version</span>
           <span className="font-semibold text-white">1.3</span>

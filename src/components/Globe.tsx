@@ -21,6 +21,8 @@ const bumpTexture = "//unpkg.com/three-globe/example/img/earth-topology.png";
 
 export default function GlobeSection() {
   const globeHostRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!globeHostRef.current) return;
@@ -56,12 +58,12 @@ export default function GlobeSection() {
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
     controls.enablePan = false;
-    controls.minDistance = 170;
+    controls.minDistance = 50;
     controls.maxDistance = 310;
 
     const resizeGlobe = () => {
-      const size = Math.min(host.clientWidth, 520);
-      globe.width(size).height(size);
+      const size = Math.min(host.clientWidth, host.clientHeight);
+      globe.width(1550).height(size);
     };
 
     resizeGlobe();
@@ -73,35 +75,51 @@ export default function GlobeSection() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!sectionRef.current || !parallaxRef.current) return;
+
+    const section = sectionRef.current;
+    const parallaxTarget = parallaxRef.current;
+    let rafId: number | null = null;
+
+    const updateParallax = () => {
+      rafId = null;
+
+      const rect = section.getBoundingClientRect();
+      const viewportCenterY = window.innerHeight / 2;
+      const sectionCenterY = rect.top + rect.height / 2;
+      const distanceFromCenter = sectionCenterY - viewportCenterY;
+      const offsetY = Math.max(-40, Math.min(40, -distanceFromCenter * 0.12));
+
+      parallaxTarget.style.transform = `translate3d(0, ${offsetY.toFixed(2)}px, 0)`;
+    };
+
+    const queueUpdate = () => {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(updateParallax);
+    };
+
+    queueUpdate();
+    window.addEventListener("scroll", queueUpdate, { passive: true });
+    window.addEventListener("resize", queueUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", queueUpdate);
+      window.removeEventListener("resize", queueUpdate);
+
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
+    };
+  }, []);
+
   return (
-    <section className="relative overflow-hidden bg-slate-950 px-6 py-24 text-white sm:px-10">
+    <section ref={sectionRef} className="relative overflow-hidden bg-slate-950  text-white">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(59,130,246,0.2),transparent_50%),radial-gradient(circle_at_80%_30%,rgba(168,85,247,0.22),transparent_55%)]" />
-
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-2">
-        <div>
-          <p className="mb-4 inline-flex rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-1 text-sm font-medium text-cyan-200">Global Coverage</p>
-          <h2 className="text-balance text-4xl font-black leading-tight sm:text-5xl">
-            One modern platform,
-            <span className="bg-linear-to-r from-cyan-300 via-blue-300 to-violet-300 bg-clip-text text-transparent"> connected worldwide.</span>
-          </h2>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
-            Our teams collaborate across time zones to ship fast, support customers around the clock, and deliver a consistent experience globally.
-          </p>
-
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {worldPins.map((pin) => (
-              <article key={pin.city} className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-                <p className="text-xs uppercase tracking-wider text-cyan-300">{pin.country}</p>
-                <h3 className="mt-1 text-lg font-semibold text-white">{pin.city}</h3>
-                <p className="mt-2 text-sm text-slate-300">{pin.note}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-center lg:justify-end">
-          <div className="w-full max-w-130 rounded-3xl border border-cyan-300/15 bg-slate-900/40 p-4 shadow-[0_25px_85px_rgba(8,47,73,0.45)] backdrop-blur-sm">
-            <div ref={globeHostRef} className="mx-auto aspect-square w-full" />
+      <div className="flex justify-center">
+        <div className="!h-[70dvh] w-max max-w-full ">
+          <div ref={parallaxRef} className="flex h-full w-full items-center justify-center will-change-transform">
+            <div ref={globeHostRef} className="h-full w-full" />
           </div>
         </div>
       </div>
